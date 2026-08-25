@@ -29,6 +29,6 @@ function matchParticipants(participants) {
                 bestSenior = sen;
             }
         }
-        return { volunteer: vol.name, senior: bestSenior.name, score: bestScore };
+        return { volunteer: vol, senior: bestSenior, score: bestScore };
     });
 }
