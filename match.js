@@ -1,12 +1,16 @@
 function evalScore(vol, sen) {
-    const matchedDates = vol.dates.filter(d =>
-        sen.dates.some(sd => sd.getTime() === d.getTime())
-    ).length;
+    let matchedDates = 0;
+    for (let i = 0; i < vol.dates.length; i++) {
+        for (let j = 0; j < sen.dates.length; j++) {
+            if (vol.dates[i].getTime() === sen.dates[j].getTime()) matchedDates++;
+        }
+    }
     if (matchedDates < 3) return 0;
 
-    const matchedLang = vol.languages.filter(l =>
-        sen.languages.includes(l)
-    ).length;
+    let matchedLang = 0;
+    for (let i = 0; i < vol.languages.length; i++) {
+        if (sen.languages.includes(vol.languages[i])) matchedLang++;
+    }
     if (matchedLang < 1) return 0;
 
     let score = 0;
@@ -17,18 +21,24 @@ function evalScore(vol, sen) {
 }
 
 function matchParticipants(participants) {
-    const volunteers = participants.filter(p => p.party === "VOLUNTEER");
-    const seniors = participants.filter(p => p.party === "SENIOR");
+    const volunteers = [];
+    const seniors = [];
+    for (let i = 0; i < participants.length; i++) {
+        if (participants[i].party === "VOLUNTEER") volunteers.push(participants[i]);
+        else seniors.push(participants[i]);
+    }
 
-    return volunteers.map(vol => {
+    const matches = [];
+    for (let i = 0; i < volunteers.length; i++) {
         let bestSenior = null, bestScore = 0;
-        for (const sen of seniors) {
-            const score = evalScore(vol, sen);
+        for (let j = 0; j < seniors.length; j++) {
+            const score = evalScore(volunteers[i], seniors[j]);
             if (score > bestScore) {
                 bestScore = score;
-                bestSenior = sen;
+                bestSenior = seniors[j];
             }
         }
-        return { volunteer: vol, senior: bestSenior, score: bestScore };
-    });
+        matches.push({ volunteer: volunteers[i], senior: bestSenior, score: bestScore });
+    }
+    return matches;
 }
