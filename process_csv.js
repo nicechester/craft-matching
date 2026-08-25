@@ -51,13 +51,15 @@ function parseParticipant(row, headers) {
 function parseSenior(row, headers) {
     const languages = row[5].split(";").map(l => l.trim());
     const answers = {};
-    for (let i = 6; i < 9; i++) answers[headers[i]] = row[i];
+    for (let i = 6; i < 9; i++)
+        answers[headers[i]] = row[i];
     return { languages, answers };
 }
 
 function parseVolunteer(row, headers) {
     const languages = row[12].split(";").map(l => l.trim());
     const answers = {};
-    for (let i = 13; i < 16; i++) answers[headers[i]] = row[i];
+    for (let i = 13; i < 16; i++)
+        answers[headers[i]] = row[i];
     return { languages, answers };
 }
