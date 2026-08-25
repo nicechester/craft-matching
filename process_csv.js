@@ -20,23 +20,8 @@ function renderResults(matches) {
         results.innerHTML = "<p>No matches found.</p>";
         return;
     }
-    results.innerHTML = `
-        <table>
-            <thead>
-                <tr>
-                    <th>Volunteer</th>
-                    <th>Volunteer Email</th>
-                    <th>Senior</th>
-                    <th>Senior Email</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-            <tbody id="matchtbody"></tbody>
-        </table>
-    `;
-    const tbody = document.getElementById("matchtbody");
-    const template = document.createElement("template");
-    template.innerHTML = "<tr><td></td><td></td><td></td><td></td><td></td></tr>";
+    const tbody = document.getElementById("match-tbody");
+    const template = document.getElementById("match-row-template");
     for (let i = 0; i < matches.length; i++) {
         const m = matches[i];
         const clone = template.content.cloneNode(true);
