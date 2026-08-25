@@ -13,5 +13,28 @@
         <div id="results"></div>
         <script src="match.js"></script>
         <script src="process_csv.js"></script>
+
+        <table id="match-table">
+            <thead>
+                <tr>
+                    <th>Volunteer</th>
+                    <th>Volunteer Email</th>
+                    <th>Senior</th>
+                    <th>Senior Email</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="match-tbody"></tbody>
+        </table>
+
+        <template id="match-row-template">
+            <tr>
+                <td class="volunteer"></td>
+                <td class="volunteer-email"></td>
+                <td class="senior"></td>
+                <td class="senior-email"></td>
+                <td class="score"></td>
+            </tr>
+        </template>
     </body>
 </html>
