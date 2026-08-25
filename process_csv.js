@@ -20,15 +20,6 @@ function renderResults(matches) {
         results.innerHTML = "<p>No matches found.</p>";
         return;
     }
-    const rows = matches.map(m => `
-        <tr>
-            <td>${m.volunteer.name}</td>
-            <td>${m.volunteer.email}</td>
-            <td>${m.senior ? m.senior.name : "—"}</td>
-            <td>${m.senior ? m.senior.email : "—"}</td>
-            <td>${m.score}</td>
-        </tr>
-    `).join("");
     results.innerHTML = `
         <table>
             <thead>
@@ -40,9 +31,23 @@ function renderResults(matches) {
                     <th>Score</th>
                 </tr>
             </thead>
-            <tbody>${rows}</tbody>
+            <tbody id="matchtbody"></tbody>
         </table>
     `;
+    const tbody = document.getElementById("matchtbody");
+    const template = document.createElement("template");
+    template.innerHTML = "<tr><td></td><td></td><td></td><td></td><td></td></tr>";
+    for (let i = 0; i < matches.length; i++) {
+        const m = matches[i];
+        const clone = template.content.cloneNode(true);
+        const td = clone.querySelectorAll("td");
+        td[0].textContent = m.volunteer.name;
+        td[1].textContent = m.volunteer.email;
+        td[2].textContent = m.senior ? m.senior.name : "—";
+        td[3].textContent = m.senior ? m.senior.email : "—";
+        td[4].textContent = m.score;
+        tbody.appendChild(clone);
+    }
 }
 
 function parseParticipant(row, headers) {
