@@ -1,9 +1,17 @@
 <html>
     <head>
         <title>Senior Craft Class - Volunteer Matching</title>
+        <script src="csv.min.js"></script>
     </head>
     <body>
         <h1>Senior Craft Class - Volunteer Matching</h1>
-        
+        <div class="file-input-container">
+            <input type="file" name="csvFile" id="csvFile" accept=".csv">
+            <label for="csvFile">Choose CSV File</label>
+        </div>
+        <button id="matchBtn">Load &amp; Match</button>
+        <div id="results"></div>
+        <script src="match.js"></script>
+        <script src="process_csv.js"></script>
     </body>
 </html>
