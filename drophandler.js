@@ -1,11 +1,9 @@
 const dropZone = document.getElementById("drop-zone");
+fileInput.addEventListener("change", () => { if (fileInput.files[0]) loadCSV(fileInput.files[0]); });
 
 dropZone.addEventListener("drop", dropHandler);
-window.addEventListener("drop", (e) => {
-  if ([...e.dataTransfer.items].some((item) => item.kind === "file")) {
-    e.preventDefault();
-  }
-});
+window.addEventListener("drop", (e) => e.preventDefault());
+window.addEventListener("dragover", (e) => e.preventDefault());
 dropZone.addEventListener("dragover", (e) => {
   const fileItems = [...e.dataTransfer.items].filter(
     (item) => item.kind === "file",
@@ -16,17 +14,6 @@ dropZone.addEventListener("dragover", (e) => {
   }
 });
 
-window.addEventListener("dragover", (e) => {
-  const fileItems = [...e.dataTransfer.items].filter(
-    (item) => item.kind === "file",
-  );
-  if (fileItems.length > 0) {
-    e.preventDefault();
-    if (!dropZone.contains(e.target)) {
-      e.dataTransfer.dropEffect = "none";
-    }
-  }
-});
 const preview = document.getElementById("preview");
 
 function dropHandler(ev) {

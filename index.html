@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>Senior Craft Class - Volunteer Matching</title>
         <script src="https://cdn.jsdelivr.net/gh/rufuspollock/csv.js/csv.min.js"></script>
         <link rel="stylesheet" type="text/css" href="craft.css">
@@ -7,8 +8,9 @@
     <body>
         <h1>Senior Craft Class - Volunteer Matching</h1>
         <div class="file-input-container">
-            <label id="drop-zone">
-            Drop file here
+            <input type="file" id="csvFile" accept=".csv" style="display:none">
+            <label id="drop-zone" for="csvFile">
+            Drop file here or click to select
             </label>
             <ul id="preview"></ul>
             <button id="clear-btn">Clear</button>
