@@ -12,11 +12,7 @@ dropZone.addEventListener("dragover", (e) => {
   );
   if (fileItems.length > 0) {
     e.preventDefault();
-    if (fileItems.some((item) => item.type.startsWith("image/"))) {
-      e.dataTransfer.dropEffect = "copy";
-    } else {
-      e.dataTransfer.dropEffect = "none";
-    }
+    e.dataTransfer.dropEffect = "copy";
   }
 });
 
