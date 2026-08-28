@@ -1,17 +1,17 @@
 function evalScore(vol, sen) {
+    let matchedLang = 0;
+    for (let i = 0; i < vol.languages.length; i++) {
+        if (sen.languages.includes(vol.languages[i])) matchedLang++;
+    }
+    if (matchedLang < 1) return -2;
+
     let matchedDates = 0;
     for (let i = 0; i < vol.dates.length; i++) {
         for (let j = 0; j < sen.dates.length; j++) {
             if (vol.dates[i].getTime() === sen.dates[j].getTime()) matchedDates++;
         }
     }
-    if (matchedDates < 3) return 0;
-
-    let matchedLang = 0;
-    for (let i = 0; i < vol.languages.length; i++) {
-        if (sen.languages.includes(vol.languages[i])) matchedLang++;
-    }
-    if (matchedLang < 1) return 0;
+    if (matchedDates < 3) return -1;
 
     let score = 0;
     for (const [key, val] of Object.entries(vol.answers)) {
