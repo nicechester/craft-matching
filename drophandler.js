@@ -39,8 +39,6 @@ function dropHandler(ev) {
 
 const clearBtn = document.getElementById("clear-btn");
 clearBtn.addEventListener("click", () => {
-  for (const img of preview.querySelectorAll("img")) {
-    URL.revokeObjectURL(img.src);
-  }
-  preview.textContent = "";
+    const tbody = document.getElementById("match-tbody");
+    tbody.innerHTML = '';
 });
