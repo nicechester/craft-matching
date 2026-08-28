@@ -1,18 +1,4 @@
 const fileInput = document.getElementById("csvFile");
-const matchBtn = document.getElementById("matchBtn");
-
-matchBtn.addEventListener("click", function () {
-    const file = fileInput.files[0];
-    if (!file || file.type !== "text/csv") {
-        alert("Please select a CSV file first.");
-        return;
-    }
-    CSV.fetch({ file: file }).then(function (dataset) {
-        const participants = dataset.records.map(row => parseParticipant(row, dataset.fields));
-        const matches = matchParticipants(participants);
-        renderResults(matches);
-    });
-});
 
 function loadCSV(file) {
     if (!file || file.type !== "text/csv") {
@@ -25,6 +11,7 @@ function loadCSV(file) {
         renderResults(matches);
     });
 }
+
 function renderResults(matches) {
     const results = document.getElementById("results");
     if (matches.length === 0) {
